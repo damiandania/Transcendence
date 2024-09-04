@@ -1,7 +1,8 @@
 # Transcendence
 
 <p>
-  <img src="https://github.com/damiandania/damiandania/blob/main/Pics/Transcendence.png"/>
+  <img src="https://github.com/damiandania/damiandania/blob/main/Pics/Transcendence.png"
+  	alt="Project pic" width="150" height="150"/>
 </p>
 
 The ft_transcendence project is a team project from 42 school, where the goal is to develop a website that allows users to create accounts via the 42 API, play real-time multiplayer games of Pong, and we added a second game called Invaders.
