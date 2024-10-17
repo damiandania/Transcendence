@@ -1,0 +1,98 @@
+/* Font styles */
+.font-balsamiq {
+	font-family: 'Balsamiq Sans', cursive;
+	font-weight: 700;
+}
+
+.font-roboto {
+	font-family: 'Roboto', sans-serif;
+	color: 71, 46, 39;
+}
+
+header {
+	box-shadow: 0 4px 8px rgba(83, 53, 35, 0.2);
+	z-index: 10;
+}
+
+/* High contrast */
+body.high-contrast, header.high-contrast, footer.high-contrast {
+	background-color: #000;
+	color: #fff;
+}
+
+/* buttons in high contrast */
+.high-contrast .btn {
+	background-color: #222;
+	color: #fff;
+	border: 1px solid #fff;
+}
+
+.high-contrast input[type="checkbox"]:checked {
+	background-color: #fff;
+	border-color: #000;
+	color: #000;
+}
+
+
+
+.high-contrast .darky-color {
+	/* background-color: #fff; */
+	color: #000;
+}
+
+.high-contrast .whity-color {
+	color: #fff
+}
+
+
+/* Form */
+.high-contrast input[type="text"],
+.high-contrast input[type="email"],
+.high-contrast input[type="password"],
+.high-contrast input[type="file"],
+.high-contrast textarea,
+.high-contrast select {
+	background-color: #fdfdfd;
+	border: 2px solid #000;
+	color: #000;
+}
+
+/* image */
+.high-contrast img#logo-42 {
+	content: url("../img/42_Logo_white.png");
+}
+
+/* Focus outline for better navigation visibility */
+.high-contrast .btn:hover {
+	background-color: #fff;
+	color: #000;
+	border-color: #000;
+	border: 2px solid black;
+	outline: 2px solid black;
+}
+
+.high-contrast .btn:active {
+	background-color: #ccc;
+	color: #000;
+	border-color: #000;
+	border: 2px solid black;
+	outline: 2px solid black;
+}
+
+.high-contrast .btn:focus {
+	outline: 2px solid #fff;
+	background-color: #444;
+	border-color: #000;
+	border: 2px solid black;
+	outline: 2px solid black;
+}
+
+a.card:hover {
+	background-color: var(--bs-primary);
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a.card:hover img {
+	opacity: 0.9;
+	transition: opacity 0.3s ease;
+}

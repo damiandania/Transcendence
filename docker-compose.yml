@@ -1,0 +1,80 @@
+services:
+  mywebsite:
+    build: ./mywebsite
+    container_name: mywebsite
+    # command: daphne -u daphne/daphne.sock mywebsite.asgi:application
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: gunicorn mywebsite.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/staticfiles/
+      - media_volume:/app/media/
+      - ./mywebsite:/app
+      - daphne_volume:/app/daphne
+    ports:
+      - 8000:8000
+      - 6789:6789
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - ft_transcendence
+
+  db:
+    image: postgres:16
+    container_name: postgres
+    volumes:
+      - db_volume:/var/lib/postgresql/data/
+    restart: unless-stopped
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ft_transcendence
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    volumes:
+      - static_volume:/staticfiles/
+      - media_volume:/media/
+      - daphne_volume:/daphne
+    ports:
+      - 8080:8080
+    depends_on:
+      mywebsite:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-kf", "https://localhost:8080/home"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ft_transcendence
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6380:6379"
+    networks:
+      - ft_transcendence
+
+volumes:
+  db_volume:
+    name: db_volume
+  static_volume:
+    name: static_volume
+  media_volume:
+    name: media_volume
+  daphne_volume:
+    name: daphne_volume
+
+networks:
+  ft_transcendence:
+    name: ft_transcendence
